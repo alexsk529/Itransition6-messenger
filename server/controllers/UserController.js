@@ -26,7 +26,7 @@ class UserController {
                 jwtSecret,
                 {expiresIn: '1h'});
 
-            res.json({token, userId: user._id});
+            res.json({token, userId: user._id, name});
 
         } catch(e) {
             console.log(e)
@@ -42,15 +42,16 @@ class UserController {
                     message: 'Invalid data'
                 })
             }
-            const {message, recipient, title} = req.body;
-            const user = User.findOne({recipient});
+            const {message, recipient: name, title, from} = req.body;
+            const user = await User.findOne({name});
             if (!user) return res.status(400).json({message: 'There is no such recipient'})
             user.msgs.push({
                 date: `${new Date().toLocaleString()}`,
                 title: title,
-                msg: message
+                msg: message,
+                from: from
             })
-            await user.save();
+           await user.save();
             res.json({message: 'The message has been sent'});
 
         } catch (e) {
@@ -63,12 +64,11 @@ class UserController {
             const name = req.params.name.slice(1);
             const user = await User.findOne({name});
 
-            res.json(user.msgs)
-
+            res.json(user?.msgs)
         } catch(e) {
             console.log(e)
         }
     }
 }
 
-export default UserController
+export default new UserController()

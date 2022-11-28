@@ -4,7 +4,7 @@ import UserController from '../controllers/UserController.js'
 
 const router =Router();
 
-router.post('/auth',
+router.post('/',
     [
         check('name', 'Type in your name').isLength({min: 1})
     ],
