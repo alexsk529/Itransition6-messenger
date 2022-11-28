@@ -22,4 +22,4 @@
 ``` npm run client ``` - run frontend side <br/>
 ``` npm run dev ``` - run both backend and frontend sides
 
-Проект доступен по [ссылке]()
+Проект доступен по [ссылке](https://itransition-messenger.vercel.app/)

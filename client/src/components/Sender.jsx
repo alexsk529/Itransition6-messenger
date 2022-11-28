@@ -10,6 +10,12 @@ export const Sender = ({form, setForm, name}) => {
 
     const handlerChange = (e) => {
         setForm({...form, [e.target.name]:e.target.value});
+        console.log(form)
+    }
+
+    const handlerAutocompleteChange = (e, values) => {
+        if (values && typeof values ==='object') setForm({...form, recipient: values.label});
+
     }
 
     const handlerSendClick = async () => {
@@ -26,16 +32,16 @@ export const Sender = ({form, setForm, name}) => {
     }
 
     const names = [
-        {label: 'Aleksandr'},
-        {label: 'Bogdan'},
-        {label: 'Ekaterina'},
-        {label: 'Elizabeth'},
-        {label: 'Jack'},
-        {label: 'John'},
-        {label: 'Michael'},
-        {label: 'Pavel'},
-        {label: 'Sergey'},
-        {label: 'Rustam'},
+        {label: "Aleksandr"},
+        {label: "Bogdan"},
+        {label: "Ekaterina"},
+        {label: "Elizabeth"},
+        {label: "Jack"},
+        {label: "John"},
+        {label: "Michael"},
+        {label: "Pavel"},
+        {label: "Sergey"},
+        {label: "Rustam"},
     ]
 
     return(
@@ -58,13 +64,13 @@ export const Sender = ({form, setForm, name}) => {
                 <Grid item xs={8} sm={4}>
                     <Autocomplete
                         id="combo-box-demo"
-                        name="recipient"
-                        onChange={handlerChange}
+                        freeSolo
+                        onChange={handlerAutocompleteChange}
                         options={names}
                         sx={{
                             width: '100%'
                         }}
-                        renderInput={(params) => <TextField{...params} label="Recipient" variant="standard"/>}
+                        renderInput={(params) => <TextField name="recipient" onChange={handlerChange} {...params} label="Recipient" variant="standard"/>}
                     />
                 </Grid>
                 <Grid item xs={8} sm={4}>
