@@ -11,7 +11,7 @@ export const Reciever = ({name, msgs}) => {
                 borderColor: 'grey.500',
                 boxShadow: 1,
                 height: 285,
-                width: 400,
+                width: 500,
                 bgcolor: '#fff',
                 overflowX: 'hidden',
                 display: 'flex',
@@ -42,7 +42,7 @@ export const Reciever = ({name, msgs}) => {
                     else div.remove()
                 }}
                 key={msg.date}
-                sx={{fontSize: 10, p: 1, width: '95%'}}
+                sx={{fontSize: 13, p: 1, width: '95%'}}
                 elevation={3}
             ><b>Date: </b>{msg.date} - <b>From: </b>{msg.from} - <b>Title: </b>{msg.title} </Paper>) : null }
 
