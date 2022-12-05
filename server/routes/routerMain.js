@@ -12,4 +12,4 @@ router.patch('/send',
 
 router.get('/refresh/:name', UserController.refreshData)
 
-export default router;
+export default routfer;
