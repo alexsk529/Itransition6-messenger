@@ -7,10 +7,12 @@ import './AuthPage.css'
 
 const AuthPage = function () {
     const [name, setName] = React.useState({name: ''});
+    const [isPending, setIsPending] = React.useState(false)
     const {enter} = React.useContext(AuthContext)
 
     const handlerEnter = async () => {
         try {
+            setIsPending(true)
             await axios
                 .post('/api/auth', name, {
                 header: {
@@ -49,7 +51,7 @@ const AuthPage = function () {
             <Button
                 variant="contained"
                 onClick={handlerEnter}
-            >Enter the Messenger</Button>
+            >{isPending ? 'Loading...' : 'Enter the Messenger'}</Button>
         </Box>
     )
 }
