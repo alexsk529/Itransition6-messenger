@@ -5,6 +5,7 @@ import {AuthContext} from "../context/AuthContext.js";
 import axios from "../axios.js";
 
 export const Sender = ({form, setForm, name}) => {
+    const [isPending, setIsPending] = React.useState(false)
 
     const {exit} = React.useContext(AuthContext)
 
@@ -20,12 +21,14 @@ export const Sender = ({form, setForm, name}) => {
 
     const handlerSendClick = async () => {
         try {
+            setIsPending(true)
             await axios
                 .patch('/api/main/send', {...form, from: name}, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 })
+                .then(() => setIsPending(false))
         } catch (e) {
             console.log(e)
         }
@@ -107,7 +110,7 @@ export const Sender = ({form, setForm, name}) => {
                 endIcon={<SendIcon/>}
                 onClick={handlerSendClick}
             >
-                Send
+                {isPending ? 'Is sending...' : 'Send'}
             </Button>
         </Box>
     )
